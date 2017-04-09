@@ -14,7 +14,7 @@ namespace DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=CompanySolution;Trusted_Connection=True;Integrated Security = True;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLExpress;Database=CompanySolution;Trusted_Connection=True;Integrated Security = True;");
         }
     }
 }

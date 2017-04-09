@@ -12,6 +12,9 @@ import { connect } from 'react-redux';
 
 import * as companiesActions from '../actions/companiesActions';
 
+
+import Company from './Company';
+
 //import * as CompaniesListActions from './CompaniesListActions';
 
 // import './CompaniesList.module.scss';
@@ -20,20 +23,53 @@ class CompaniesList extends Component {
 
 	constructor(props) {
 		super(props);
+		this.props.loadCompanies();
 	}
 
-	showCompanyies() {
+	changeName(e) {
+		let value = e.target.value;
+		this.setState({
+			name: value
+		})
+	}
+
+	showCompanies() {
 		this.props.loadCompanies();
+	}
+
+	addCompany() {
+		if (!this.state.name)
+			return;
+		this.props.addCompany(this.state.name);
+		this.setState({
+			name: ''
+		});
+	}
+
+	renderCompanies(companies) {
+		return companies.map(item => {
+			return <Company company={item} key={item.id} />
+		})
 	}
 
 	render() {
 
 		return (
-			<div className='CompaniesList'  >
-				<button onClick={this.showCompanyies.bind(this)} >
-					loadCompanies
+			<div className='container'>
+				<div>
+					<input type="text" onChange={this.changeName.bind(this)} />
+					<button onClick={this.addCompany.bind(this)} >
+						Create company
 					</button>
-
+				</div>
+				<div className='CompaniesList'  >
+					{
+						this.renderCompanies(this.props.companiesList)
+					}
+				</div>
+				<button onClick={this.showCompanies.bind(this)} >
+					Update companies
+				</button>
 			</div>
 		);
 	}
@@ -46,7 +82,7 @@ CompaniesList.propTypes = {
 
 function mapStateToProps(state) {
 	return {
-		CompaniesList: state.CompaniesList
+		companiesList: state.companies.companiesList
 	}
 }
 

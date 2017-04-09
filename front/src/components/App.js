@@ -1,10 +1,11 @@
 import React from 'react'
-import Footer from './Footer'
 import CompaniesList from './CompaniesList'
+import UsersList from './UsersList'
 
 const App = () => (
-  <div>
+  <div className='mainContainer'>
     <CompaniesList />
+    <UsersList />
   </div>
 )
 

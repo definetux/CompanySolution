@@ -1,24 +1,67 @@
 
 
-export function loadCompanies() {
-  return (dispatch, getStore) => {
-    let store = getStore();
-	debugger
-	var myHeaders = new Headers();
-	var myInit = { method: 'GET',
-               headers: myHeaders,
-               mode: 'cors',
-               cache: 'default' };
-    fetch('http://localhost:50189/api/company', myInit).then((data, err) => {
-      debugger
-      // dispatch({
-      // 	type: CLOSE_CONTEXT,
-      // 	x: 0,
-      // 	y: 0,
-      // 	mode: undefined,
-      // 	category: 'model'
-      // });
-    })
 
-  }
+export const LOAD_COMPANIES = 'LOAD_COMPANIES';
+export const LOAD_USERS = 'LOAD_USERS';
+export const SELECT_COMPANY = 'SELECT_COMPANY';
+
+
+import { companyService } from '../service/companyService'
+
+
+export function loadCompanies() {
+	return (dispatch, getStore) => {
+		let store = getStore();
+		companyService.getCompanies((companiesList) => {
+			dispatch({
+				type: LOAD_COMPANIES,
+				companiesList
+			})
+		})
+	}
+}
+
+export function addCompany(name) {
+	return (dispatch, getStore) => {
+		let store = getStore();
+		companyService.addCompany(name, () => {
+			dispatch(loadCompanies());
+		})
+	}
+}
+
+export function removeCompany(id) {
+	return (dispatch, getStore) => {
+		let store = getStore();
+		companyService.removeCompany(id, () => {
+			dispatch(loadCompanies());
+		})
+	}
+}
+
+export function loadUsers(companyId) {
+	return (dispatch, getStore) => {
+		let store = getStore();
+		dispatch({
+			type: SELECT_COMPANY,
+			companyId
+		});
+		let company = store.companies.companiesList.find(item => item.id === companyId);
+		dispatch({
+			type: LOAD_USERS,
+			usersList: company.staff
+		});
+
+		// companyService.addCompany(name, () => {
+		// 	dispatch(loadCompanies());
+		// })
+	}
+}
+
+export function addUser(companyId, user) {
+	return (dispatch, getStore) => {
+		companyService.addUser(companyId, user, () => {
+			dispatch(loadCompanies());
+		})
+	}
 }
