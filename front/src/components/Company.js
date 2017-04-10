@@ -23,7 +23,7 @@ class Company extends Component {
 	}
 
 	renderCompany(company) {
-		return <div className='company'>
+		return <div className='company' style={this.props.isSelected ? {'background-color': 'cornflowerblue'} : {}}>
 			<button onClick={this.removeCompany.bind(this, company.id)} >
 				Delete
 			</button >
@@ -49,7 +49,8 @@ class Company extends Component {
 }
 
 Company.propTypes = {
-	company: PropTypes.node.isRequired
+	company: PropTypes.object.isRequired,
+	isSelected: PropTypes.bool.isRequired,
 }
 
 

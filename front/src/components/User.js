@@ -48,7 +48,7 @@ class Company extends Component {
 }
 
 Company.propTypes = {
-	user: PropTypes.node.isRequired
+	user: PropTypes.object.isRequired
 }
 
 

@@ -58,6 +58,22 @@ export var companyService = {
 
 	},
 
+	getUsers(id, cb) {
+		fetch(addressCompany + id + '/user', {
+			method: 'GET'
+		}).then((response) => {
+			if (response.ok) {
+				return response.json();
+				//cb();
+			} else {
+				//renderError();
+			}
+		}).then((users) => {
+			cb(users);
+		});;
+
+	},
+
 	removeCompany(id, cb) {
 		fetch(addressCompany + id, {
 			method: 'DELETE'

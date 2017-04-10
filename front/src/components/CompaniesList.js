@@ -45,10 +45,13 @@ class CompaniesList extends Component {
 			name: ''
 		});
 	}
+	isSelected(id) {
+		return this.props.selectedCompany === id;
+	}
 
 	renderCompanies(companies) {
 		return companies.map(item => {
-			return <Company company={item} key={item.id} />
+			return <Company company={item} key={item.id} isSelected={this.isSelected(item.id)} />
 		})
 	}
 
@@ -82,7 +85,8 @@ CompaniesList.propTypes = {
 
 function mapStateToProps(state) {
 	return {
-		companiesList: state.companies.companiesList
+		companiesList: state.companies.companiesList,
+		selectedCompany: state.companies.selectedCompany
 	}
 }
 

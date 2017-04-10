@@ -46,11 +46,17 @@ export function loadUsers(companyId) {
 			type: SELECT_COMPANY,
 			companyId
 		});
-		let company = store.companies.companiesList.find(item => item.id === companyId);
-		dispatch({
-			type: LOAD_USERS,
-			usersList: company.staff
-		});
+		companyService.getUsers(companyId, (users) => {
+			dispatch({
+				type: LOAD_USERS,
+				usersList: users
+			});
+		})
+		// store.companies.companiesList.find(item => item.id === companyId);
+		// dispatch({
+		// 	type: LOAD_USERS,
+		// 	usersList: company.staff
+		// });
 
 		// companyService.addCompany(name, () => {
 		// 	dispatch(loadCompanies());
@@ -61,7 +67,7 @@ export function loadUsers(companyId) {
 export function addUser(companyId, user) {
 	return (dispatch, getStore) => {
 		companyService.addUser(companyId, user, () => {
-			dispatch(loadCompanies());
+			dispatch(loadUsers(companyId));
 		})
 	}
 }

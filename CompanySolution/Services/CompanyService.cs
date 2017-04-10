@@ -22,6 +22,21 @@ namespace CompanySolution.Services
             }
         }
 
+        public async Task<List<User>> GetCompanyUsers(int id)
+        {
+            using (var context = new CompanySolutionContext())
+            {
+                var company = await context.Companies
+                                        .Include(x => x.Staff)
+                                        .SingleOrDefaultAsync(x=> x.Id == id);
+                if (company != null)
+                {
+                    return company.Staff;
+                }
+                return null;
+            }
+        }
+
         public async Task<Company> GetCompany(int id)
         {
             using (var context = new CompanySolutionContext())

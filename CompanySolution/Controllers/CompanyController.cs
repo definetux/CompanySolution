@@ -23,6 +23,12 @@ namespace CompanySolution.Controllers
             return _companyService.GetCompanies();
         }
 
+        [HttpGet("{id}/user")]
+        public Task<List<User>> GetUsers(int id)
+        {
+            return _companyService.GetCompanyUsers(id);
+        }
+
         [HttpGet("{id}")]
         public Task<Company> Get(int id)
         {

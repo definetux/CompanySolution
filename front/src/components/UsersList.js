@@ -70,20 +70,20 @@ class UsersList extends Component {
 					this.state.showForm ?
 						<div>
 							<div>
-								<span> First Name </span>
-								<input type="text" onChange={this.changeValue.bind(this, 'firstName')} />
+								<span className='item-name'> First Name </span>
+								<input className='item-edit' type="text" onChange={this.changeValue.bind(this, 'firstName')} />
 							</div>
 							<div>
-								<span> Last Name </span>
-								<input type="text" onChange={this.changeValue.bind(this, 'lastName')} />
+								<span className='item-name'> Last Name </span>
+								<input className='item-edit' type="text" onChange={this.changeValue.bind(this, 'lastName')} />
 							</div>
 							<div>
-								<span> Age </span>
-								<input type="number" onChange={this.changeValue.bind(this, 'age')} />
+								<span className='item-name'> Age </span>
+								<input className='item-edit' type="number" onChange={this.changeValue.bind(this, 'age')} />
 							</div>
 							<div>
-								<span> Position </span>
-								<input type="number" onChange={this.changeValue.bind(this, 'position')} />
+								<span className='item-name'> Position </span>
+								<input className='item-edit' type="number" onChange={this.changeValue.bind(this, 'position')} />
 							</div>
 							<button onClick={this.addUser.bind(this)} >
 								Add user
